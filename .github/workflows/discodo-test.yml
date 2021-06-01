@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       discodo:
-        image: kijk2869/discodo
+        image: kijk2869/discodo:release-3.0.3
         ports:
           - 8000:8000
     steps:
