@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       discodo:
-        image: docker.pkg.github.com/kijk2869/discodo/discodo:release-3.0.3
+        image: kijk2869/discodo
         ports:
           - 8000:8000
     steps:
