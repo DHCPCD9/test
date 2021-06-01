@@ -14,18 +14,12 @@ jobs:
         with:
           all_but_latest: true
           access_token: ${{ github.token }}
-          
-      - run: |
-          mkdir -p ~/.cloudflared
-          echo ${{ secrets.CLOUDCONFIG }} | base64 --decode > ~/.cloudflared/config.yml
-          echo ${{ secrets.CERT }} | base64 --decode > ~/.cloudflared/cert.pem
-          sed -i 's/template/discodo/g' ~/.cloudflared/config.yml
 
       - uses: kspactions/workflows/cloudflared@main
         with:
           args: version
 
-      - run: nohup cloudflared tunnel > /dev/null 2>&1 &
+      - run: nohup cloudflared tunnel --url=http://127.0.0.1:8000 &
 
       - run: sleep 358m
 
