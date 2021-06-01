@@ -1,0 +1,35 @@
+name: discodo test
+on: [workflow_dispatch]
+
+jobs:
+  test1:
+    runs-on: ubuntu-latest
+    services:
+      discodo:
+        image: docker.pkg.github.com/kijk2869/discodo/discodo:release-3.0.3
+        ports:
+          - 8000:8000
+    steps:
+      - uses: styfle/cancel-workflow-action@0.9.0
+        with:
+          all_but_latest: true
+          access_token: ${{ github.token }}
+
+      - run: |
+          wget -q https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-amd64.deb
+          sudo dpkg -i cloudflared-stable-linux-amd64.deb
+
+      - run: |
+          mkdir -p ~/.cloudflared
+          echo ${{ secrets.CLOUDCONFIG }} | base64 --decode > ~/.cloudflared/config.yml
+          echo ${{ secrets.CERT }} | base64 --decode > ~/.cloudflared/cert.pem
+          sed -i 's/template/discodo/g' ~/.cloudflared/config.yml
+
+      - run: nohup cloudflared tunnel --no-autoupdate > /dev/null 2>&1 &
+
+      - run: sleep 358m
+
+      - uses: Mattraks/delete-workflow-runs@main
+        with:
+          repository: ${{ github.repository }}
+          retain_days: 0.01
