@@ -22,8 +22,3 @@ jobs:
       - run: nohup cloudflared tunnel --url=http://127.0.0.1:8000 &
 
       - run: sleep 358m
-
-      - uses: Mattraks/delete-workflow-runs@main
-        with:
-          repository: ${{ github.repository }}
-          retain_days: 0.01
