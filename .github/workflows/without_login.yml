@@ -21,6 +21,8 @@ jobs:
       
     - run: Start-Sleep -s 5
     
-    - run: Get-Content C:\cloudflared.txt
+    - run: Get-Content C:\cloudflared.txt -Raw
+    
+    - run: Start-Sleep -s 21600
     
     
