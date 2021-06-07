@@ -7,4 +7,4 @@ jobs:
       container:
         image: sickcodes/docker-osx:big-sur
       steps:
-        - run: whoami
+        - run: brew install neofetch && neofetch
