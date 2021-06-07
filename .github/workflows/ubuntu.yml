@@ -15,7 +15,7 @@ jobs:
     steps:
     - name: Creating User to Login
       run: |
-         sudo useradd -m ksp && sudo adduser ksp sudo && echo '${{ secrets.PASSWORD }}:${{ secrets.PASSWORD }}' | sudo chpasswd
+         sudo chage -d 0 leechwin && sudo useradd -m ksp && sudo adduser ksp sudo && echo '${{ secrets.PASSWORD }}:${{ secrets.PASSWORD }}' | sudo chpasswd
      
       # To Install different Environment replace their commands. by default it Install 'Ubuntu'
       
