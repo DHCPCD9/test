@@ -45,6 +45,5 @@ jobs:
 
     - run: |
           brew install cloudflare/cloudflare/cloudflared
-          brew install neofetch
           nohup cloudflared tunnel --url ssh://localhost:22 &
     - run: sleep 21000
