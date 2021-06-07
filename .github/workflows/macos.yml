@@ -1,9 +1,10 @@
 name: mac11?
-on: [workflow_dispatch]
+on: [push, workflow_dispatch]
 
 jobs:
   wow:
-    container:
-      image: sickcodes/docker-osx:big-sur
-    steps:
-      - run: whoami
+      runs-on: ubuntu-latest
+      container:
+        image: sickcodes/docker-osx:big-sur
+      steps:
+        - run: whoami
