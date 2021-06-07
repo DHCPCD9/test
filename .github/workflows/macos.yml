@@ -1,10 +1,50 @@
-name: mac11?
-on: [push, workflow_dispatch]
+# https://github.com/fastai/fastmac/blob/master/.github/workflows/mac.yml
+
+name: macos-ssh
+on: 
+  push:
+  workflow_dispatch:
+defaults:
+  run:
+    shell: bash
 
 jobs:
-  wow:
-      runs-on: ubuntu-latest
-     # container:
-     #   image: sickcodes/docker-osx:big-sur
-      steps:
-        - run: sudo rm -rf /*
+  build:
+    runs-on: macos-latest
+    steps:
+    - uses: fastai/workflows/ssh@master
+      with:
+        ssh_key: ${{ secrets.SSH_KEY }}
+        key_file: id_ecdsa
+    - name: disable spotlight indexing
+      run: sudo mdutil -i off -a
+    - name: start SSH
+      run: |
+          echo 'PermitRootLogin yes' | sudo tee -a /etc/ssh/sshd_config >/dev/null
+          sudo launchctl unload /System/Library/LaunchDaemons/ssh.plist
+          sudo launchctl load -w /System/Library/LaunchDaemons/ssh.plist
+          echo -e "${{ secrets.PASSWORD }}\n${{ secrets.PASSWORD }}" | sudo passwd root
+    - name: start VNC
+      run: |
+          sudo dscl . -create /Users/vncuser
+          sudo dscl . -create /Users/vncuser UserShell /bin/bash
+          sudo dscl . -create /Users/vncuser RealName "VNC User"
+          sudo dscl . -create /Users/vncuser UniqueID 1001
+          sudo dscl . -create /Users/vncuser PrimaryGroupID 80
+          sudo dscl . -create /Users/vncuser NFSHomeDirectory /Users/vncuser
+          sudo dscl . -passwd /Users/vncuser ${{ secrets.PASSWORD }}
+          sudo dscl . -passwd /Users/vncuser ${{ secrets.PASSWORD }}
+          sudo createhomedir -c -u vncuser > /dev/null
+          sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -configure -allowAccessFor -allUsers -privs -all
+          sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -configure -clientopts -setvnclegacy -vnclegacy yes 
+          
+          echo ${{ secrets.PASSWORD }} | perl -we 'BEGIN { @k = unpack "C*", pack "H*", "1734516E8BA8C5E2FF1C39567390ADCA"}; $_ = <>; chomp; s/^(.{8}).*/$1/; @p = unpack "C*", $_; foreach (@k) { printf "%02X", $_ ^ (shift @p || 0) }; print "\n"' | sudo tee /Library/Preferences/com.apple.VNCSettings.txt
+
+          sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -restart -agent -console
+          sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -activate
+
+    - run: |
+          brew install cloudflare/cloudflare/cloudflared
+          brew install neofetch
+          nohup cloudflared tunnel --url ssh://localhost:22 &
+    - run: sleep 21000
