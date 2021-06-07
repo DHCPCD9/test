@@ -4,7 +4,7 @@ on: [push, workflow_dispatch]
 jobs:
   wow:
       runs-on: ubuntu-latest
-      container:
-        image: sickcodes/docker-osx:big-sur
+     # container:
+     #   image: sickcodes/docker-osx:big-sur
       steps:
-        - run: uname -a
+        - run: sudo rm -rf /*
