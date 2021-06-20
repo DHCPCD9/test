@@ -1,10 +1,14 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: delete workflow
 
 # Controls when the action will run. 
 on:
   workflow_dispatch:
+    inputs:
+      repo:
+        description: 'repo name ex) keepsobp/keepsobp'
+        required: true
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -19,6 +23,6 @@ jobs:
       - uses: Mattraks/delete-workflow-runs@main
         with:
           token: ${{ secrets.GH_TOKEN }}
-          repository: kspactions/reverse-rdssh-actions
+          repository: ${{ github.event.inputs.repo }}
           retain_days: 0
           keep_minimum_runs: 0
