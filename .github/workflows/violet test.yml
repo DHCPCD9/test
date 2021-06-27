@@ -42,7 +42,7 @@ jobs:
           zip -r -y Payload.zip Payload/Runner.app
           mv Payload.zip Payload.ipa
       - name: Upload IPA
-        uses: actions/upload-artifact@v2.2.4
+        uses: actions/upload-artifact@v2
         with:
           name: ipa-build
           path: Payload.ipa
@@ -63,7 +63,7 @@ jobs:
       - name: Build
         run: flutter build apk --release
       - name: Upload APK
-        uses: actions/upload-artifact@2
+        uses: actions/upload-artifact@v2
         with:
           name: apk-build
           path: ./build/app/outputs/apk/release/app-release.apk
