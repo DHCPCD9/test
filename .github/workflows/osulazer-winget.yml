@@ -18,5 +18,5 @@ jobs:
           dotnet-version: '5.0.x'
       - name: Download & Run wingetcreate update
         run: |
-          curl https://github.com/microsoft/winget-create/releases/download/v0.2.0.29-preview/wingetcreate.exe -L -O
+          curl https://aka.ms/wingetcreate/preview -L -O --output wingetcreate.exe
           .\wingetcreate.exe update Peppy.Osu! -u https://github.com/ppy/osu/releases/download/${{ github.event.inputs.version }}/install.exe -v ${{ github.event.inputs.version }} -t ${{ secrets.GH_TOKEN }} -s
