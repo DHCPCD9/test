@@ -19,5 +19,5 @@ jobs:
       - name: Download & Run wingetcreate update
         shell: cmd
         run: |
-          curl https://aka.ms/wingetcreate/preview -L --output wingetcreate.exe
+          curl https://github.com/microsoft/winget-create/releases/latest/download/wingetcreate.exe -L --output wingetcreate.exe
           wingetcreate.exe update Peppy.Osu! -u https://github.com/ppy/osu/releases/download/${{ github.event.inputs.version }}/install.exe -v ${{ github.event.inputs.version }} -t ${{ secrets.GH_TOKEN }} -s true
