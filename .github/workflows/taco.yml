@@ -17,7 +17,7 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Build
-      run: dotnet build DiscordBridge/DiscordBrdge.csproj -o ./build
+      run: dotnet build DiscordBridge/DiscordBridge.csproj -o ./build
     - name: Upload artifact
       uses: actions/upload-artifact@master
       with:
