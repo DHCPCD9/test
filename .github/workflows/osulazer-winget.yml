@@ -1,4 +1,4 @@
-name: Update winget package
+name: Update osu!lazer winget package
 
 on:
   workflow_dispatch:
