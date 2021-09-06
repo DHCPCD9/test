@@ -1,0 +1,20 @@
+name: web3 upload bruh
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        required: true
+
+jobs:
+  web3:
+    runs-on: ubuntu-latest
+    steps:
+      - run: wget ${{ github.event.inputs.url }} -O ./dist/
+      - uses: web3-storage/add-to-web3@v1
+        id: web3
+        with:
+          web3_token: ${{ secrets.WEB3_STORAGE_TOKEN }}
+          path_to_add: 'dist'
+
+      - run: echo https://${{ steps.web3.outputs.cid }}.ipfs.astyanax.io
