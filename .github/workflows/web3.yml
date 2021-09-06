@@ -16,5 +16,6 @@ jobs:
         with:
           web3_token: ${{ secrets.WEB3_STORAGE_TOKEN }}
           path_to_add: 'dist'
+          wrap_with_directory: true
 
       - run: echo https://${{ steps.web3.outputs.cid }}.ipfs.astyanax.io
