@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          URL=$(curl -L -s https://api.github.com/repos/endeavouros-team/ISO/releases/tags/1-EndeavourOS-ISO-releases-archive | grep -o -E "https://(.*)endeavouros-${{ env.YEAR }}(.*)x86_64(.*)")
+          URL=$(curl -L -s https://api.github.com/repos/endeavouros-team/ISO/releases/tags/1-EndeavourOS-ISO-releases-archive | grep -o -E "https://(.+)endeavouros-${{ env.YEAR }}*")
           echo $YEAR
           curl -L -s $URL -P ./$YEAR/ > /dev/null 2>&1
       - uses: web3-storage/add-to-web3@v1
