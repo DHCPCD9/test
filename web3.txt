@@ -1,6 +1,3 @@
-http://downloads.4ksamples.com/videos/sample-Elysium.2013.2160p.mkv
-http://downloads.4ksamples.com/videos/SES.Astra.UHD.Test.2.2160p.UHDTV.HEVC.x265-LiebeIst.mkv
-http://downloads.4ksamples.com/videos/SES.Astra.UHD.Test.1.2160p.UHDTV.AAC.HEVC.x265-LiebeIst.mkv
-http://downloads.4ksamples.com/videos/Honey%20Bees%2096fps%20In%204K%20(ULTRA%20HD)(4ksamples.com).mp4
-http://downloads.4ksamples.com/videos/Samsung_UHD_Soccer_Barcelona_Atletico_Madrid.ts
-http://downloads.4ksamples.com/videos/4K-Chimei-inn-60mbps%20(4ksamples)%20.mp4
+https://speed.hetzner.de/100MB.bin
+https://speed.hetzner.de/1GB.bin
+https://speed.hetzner.de/10GB.bin
