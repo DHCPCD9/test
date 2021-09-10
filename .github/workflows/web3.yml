@@ -1,21 +1,22 @@
 name: web3 upload bruh
 
 on:
+  push:
   workflow_dispatch:
-    inputs:
-      url:
-        required: true
+  paths:
+    - "web3.txt"
 
 jobs:
   web3:
     runs-on: ubuntu-latest
     steps:
-      - run: wget ${{ github.event.inputs.url }} -P ./dist/ > /dev/null 2>&1
+      - uses: actions/checkout@v2
+      - run: wget --input-file=web3.txt -P ./ghactions/ > /dev/null 2>&1
       - uses: web3-storage/add-to-web3@v1
         id: web3
         with:
           web3_token: ${{ secrets.WEB3_STORAGE_TOKEN }}
-          path_to_add: 'dist'
+          path_to_add: 'ghactions'
           wrap_with_directory: true
 
       - run: echo https://${{ steps.web3.outputs.cid }}.ipfs.astyanax.io
