@@ -4,9 +4,9 @@ on:
   push:
      branches:
        - "main"
+     paths:
+       - "web3.txt"
   workflow_dispatch:
-  paths:
-    - "web3.txt"
 
 jobs:
   web3:
