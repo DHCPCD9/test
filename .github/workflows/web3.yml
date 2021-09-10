@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: xargs -n 1 curl -L -O -P ./ghactions/ < web3.txt > /dev/null 2>&1
+      - run: xargs -n 1 curl -L -O -P ./ghactions/ < web3.txt
       - uses: web3-storage/add-to-web3@v1
         id: web3
         with:
