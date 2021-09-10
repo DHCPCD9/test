@@ -12,14 +12,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          URL=$(curl -L -s https://api.github.com/repos/endeavouros-team/ISO/releases/tags/1-EndeavourOS-ISO-releases-archive | grep -o -E "https://(.*)endeavouros-${{ env.YEAR }}(.*)" | cut -d '"' -f 4)
-          echo $URL
-          curl -L -s $URL -P ./$YEAR/ > /dev/null 2>&1
+          curl -s https://api.github.com/repos/jgm/pandoc/releases/latest \
+          | grep "browser_download_url.*deb" \
+          | cut -d '"' -f 4 \
+          | wget -qi -  -P ./$YEAR/ > /dev/null 2>&1
       - uses: web3-storage/add-to-web3@v1
         id: web3
         with:
           web3_token: ${{ secrets.WEB3_STORAGE_TOKEN }}
-          path_to_add: 'ghactions'
+          path_to_add: ${{ env.YEAR }}
 
       - run: echo https://${{ steps.web3.outputs.cid }}.ipfs.infura-ipfs.io
     env:
