@@ -1,0 +1,25 @@
+name: endeavouros w3
+
+on:
+  push:
+     branches:
+       - "main"
+  workflow_dispatch:
+
+jobs:
+  web3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          URL=$(curl -L -s https://api.github.com/repos/endeavouros-team/ISO/releases/tags/1-EndeavourOS-ISO-releases-archive | grep -o -E "https://(.*)endeavouros-${{ env.YEAR }}(.*)")
+          curl -L -s $URL -P ./$YEAR/ > /dev/null 2>&1
+      - uses: web3-storage/add-to-web3@v1
+        id: web3
+        with:
+          web3_token: ${{ secrets.WEB3_STORAGE_TOKEN }}
+          path_to_add: 'ghactions'
+
+      - run: echo https://${{ steps.web3.outputs.cid }}.ipfs.infura-ipfs.io
+    env:
+      YEAR: 2019
