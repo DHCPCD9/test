@@ -6,6 +6,7 @@ on:
        - "main"
      paths:
        - "web3.txt"
+       - ".github/workflows/web3.yml"
   workflow_dispatch:
 
 jobs:
@@ -13,12 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: wget --input-file=web3.txt -L -P ./ghactions/ > /dev/null 2>&1
+      - run: wget -L -i web3.txt -P ./ghactions/ > /dev/null 2>&1
       - uses: web3-storage/add-to-web3@v1
         id: web3
         with:
           web3_token: ${{ secrets.WEB3_STORAGE_TOKEN }}
           path_to_add: 'ghactions'
-          wrap_with_directory: true
 
-      - run: echo https://${{ steps.web3.outputs.cid }}.ipfs.astyanax.io
+      - run: echo https://${{ steps.web3.outputs.cid }}.ipfs.infura-ipfs.io
