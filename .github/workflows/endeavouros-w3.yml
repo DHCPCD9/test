@@ -10,11 +10,10 @@ jobs:
   web3:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - run: |
-          URL=$(curl -s https://api.github.com/repos/endeavouros-team/ISO/releases/tags/1-EndeavourOS-ISO-releases-archive | grep browser_download_url | grep 'endeavouros-${{ env.YEAR }}' | head -n 1 | cut -d '"' -f 4)
-          echo $URL
-          curl -LO $URL -P ./$YEAR/ > /dev/null 2>&1
+          URL=$(curl -s https://api.github.com/repos/endeavouros-team/ISO/releases/tags/1-EndeavourOS-ISO-releases-archive | grep browser_download_url | grep 'endeavouros-${{ env.YEAR }}' | cut -d '"' -f 4)
+          echo "$URL" >> web3.txt
+          wget -LO -i web3.txt -P ./$YEAR/ > /dev/null 2>&1
       - uses: web3-storage/add-to-web3@v1
         id: web3
         with:
