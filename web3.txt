@@ -1,4 +1,4 @@
-https://software-download.microsoft.com/sg/Windows11_InsiderPreview_Client_x64_ko-kr_22454.iso?t=cf65d145-3e83-4358-ab56-95350f1eddb9&e=1631402079&h=63c82aba8ca367257b837f695ebf4c04
-https://software-download.microsoft.com/sg/Windows11_InsiderPreview_EnterpriseVL_x64_ko-kr_22454.iso?t=bfa8d425-1105-461e-9712-67b066552a54&e=1631402138&h=af86a196823782b43f37a1dea6ad9507
-https://software-download.microsoft.com/sg/Windows11_InsiderPreview_Client_x64_en-us_22454.iso?t=f0ef1366-72bb-4143-adf0-777f3d31b1e1&e=1631402174&h=6a81d3867a1466e42a7c4efd76832f84
-https://software-download.microsoft.com/sg/Windows11_InsiderPreview_EnterpriseVL_x64_en-us_22454.iso?t=7bf094a6-e89d-4576-98f0-2d8e3a8d839c&e=1631402212&h=80c110551197b628bdeb971cc42f654a
+"https://software-download.microsoft.com/sg/Windows11_InsiderPreview_Client_x64_ko-kr_22454.iso?t=cf65d145-3e83-4358-ab56-95350f1eddb9&e=1631402079&h=63c82aba8ca367257b837f695ebf4c04"
+"https://software-download.microsoft.com/sg/Windows11_InsiderPreview_EnterpriseVL_x64_ko-kr_22454.iso?t=bfa8d425-1105-461e-9712-67b066552a54&e=1631402138&h=af86a196823782b43f37a1dea6ad9507"
+"https://software-download.microsoft.com/sg/Windows11_InsiderPreview_Client_x64_en-us_22454.iso?t=f0ef1366-72bb-4143-adf0-777f3d31b1e1&e=1631402174&h=6a81d3867a1466e42a7c4efd76832f84"
+"https://software-download.microsoft.com/sg/Windows11_InsiderPreview_EnterpriseVL_x64_en-us_22454.iso?t=7bf094a6-e89d-4576-98f0-2d8e3a8d839c&e=1631402212&h=80c110551197b628bdeb971cc42f654a"
