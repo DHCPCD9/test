@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: chmod a+x curl.sh && ./curl.sh
+      - run: chmod a+x curl.sh && ./curl.sh > /dev/null 2>&1
       - uses: web3-storage/add-to-web3@v1
         id: web3
         with:
