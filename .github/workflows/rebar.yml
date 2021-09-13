@@ -1,6 +1,6 @@
 name: rebar
 on:
-  workflow-dispatch:
+  workflow_dispatch:
 
 jobs:
   android-build:
