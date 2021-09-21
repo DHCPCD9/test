@@ -4,27 +4,18 @@ on: workflow_dispatch
 jobs:
   code-server:
     runs-on: ubuntu-latest
-   # container:
-    #  image: mcr.microsoft.com/vscode/devcontainers/universal:linux
-    services:
-      code-server:
-        image: ghcr.io/linuxserver/code-server:latest
-        env:
-          PUID: 1000
-          PGID: 1000
-          TZ: Asia/Seoul
-          PASSWORD: ${{ secrets.PASSWORD }}
-        ports:
-          - 8443:8443
+    container:
+      image: mcr.microsoft.com/vscode/devcontainers/universal:linux
     steps:
-      - name: sleep
-        run: sleep 10
-      - run: curl localhost:8443
+      - run: curl -fsSL https://code-server.dev/install.sh | sh
+      - run: nohup code-server --port 7272 --auth password --disable-telemetry &
+        env:
+          PASSWORD: ${{ secrets.PASSWORD }}
       - run: sudo curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o /tmp/cloudflared
       - run: sudo chmod a+x /tmp/cloudflared
       - run: /tmp/cloudflared update
-      - run: /tmp/cloudflared tunnel --url http://localhost:8443 --logfile "/tmp/cloudflared.log" &
+      - run: /tmp/cloudflared tunnel --url http://localhost:7272 --logfile "/tmp/cloudflared.log" &
       - name: show result link
         run: sleep 10 && grep -m 1 -oE "https://(.+)trycloudflare.com" /tmp/cloudflared.log && sudo rm -rf /tmp/cloudflared.log
       - name: sleep
-        run: sleep 21600
+        run: sleep 6h
