@@ -9,10 +9,14 @@ jobs:
       ports:
         - 7272
     steps:
-      - run: curl -fsSL https://code-server.dev/install.sh | sh
+      - run: echo '$(whoami):${{ secrets.PASSWORD }}' | sudo chpasswd
+      - run: |
+          curl -fOL https://github.com/cdr/code-server/releases/download/v3.5.0/code-server_3.5.0_amd64.deb
+          sudo dpkg -i code-server_3.5.0_amd64.deb
       - run: nohup code-server --port 7272 --auth password --disable-telemetry &
         env:
           PASSWORD: ${{ secrets.PASSWORD }}
+       
       - run: sudo curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o /tmp/cloudflared
       - run: sudo chmod a+x /tmp/cloudflared
       - run: /tmp/cloudflared update
