@@ -15,12 +15,12 @@ jobs:
       - run: nohup code-server --port 7272 --auth password --disable-telemetry &
         env:
           PASSWORD: ${{ secrets.PASSWORD }}
-       
+      - run: curl localhost:7272
       - run: sudo curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o /tmp/cloudflared
       - run: sudo chmod a+x /tmp/cloudflared
       - run: /tmp/cloudflared update
       - run: /tmp/cloudflared tunnel --url http://localhost:7272 --logfile "/tmp/cloudflared.log" &
       - name: show result link
-        run: sleep 10 && grep -m 1 -oE "https://(.+)trycloudflare.com" /tmp/cloudflared.log && sudo rm -rf /tmp/cloudflared.log
+        run: sleep 10 && grep -oE "https://(.+)trycloudflare.com" /tmp/cloudflared.log && sudo rm -rf /tmp/cloudflared.log
       - name: sleep
         run: sleep 6h
