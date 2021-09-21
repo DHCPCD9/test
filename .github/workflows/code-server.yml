@@ -3,21 +3,16 @@ on: workflow_dispatch
 
 jobs:
   code-server:
-    runs-on: ubuntu-latest
+    runs-on: macos-11
     steps:
-      - run: |
-          curl -fOL https://github.com/cdr/code-server/releases/download/v3.5.0/code-server_3.5.0_amd64.deb
-          sudo dpkg -i code-server_3.5.0_amd64.deb
-          rm code-server_3.5.0_amd64.deb
+      - run: brew install code-server
       - run: nohup code-server --port 8443 --auth password --disable-telemetry &
         env:
           PASSWORD: ${{ secrets.PASSWORD }}
       - run: curl localhost:8443
-      - run: sudo curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o /tmp/cloudflared
-      - run: sudo chmod a+x /tmp/cloudflared
-      - run: /tmp/cloudflared update
-      - run: /tmp/cloudflared tunnel --url http://localhost:8443 --logfile "/tmp/cloudflared.log" &
+      - run: brew install cloudflare/cloudflare/cloudflared
+      - run: cloudflared tunnel --url http://localhost:8443 --logfile "/tmp/cloudflared.log" &
       - name: show result link
-        run: sleep 10 && grep -oE "https://(.+)trycloudflare.com" /tmp/cloudflared.log && sudo rm -rf /tmp/cloudflared.log
+        run: sleep 10 && cat /tmp/cloudflared.log && sudo rm -rf /tmp/cloudflared.log
       - name: sleep
-        run: sleep 6h
+        run: sleep 36000
