@@ -3,7 +3,7 @@ on: workflow_dispatch
 
 jobs:
   code-server:
-    runs-on: ubuntu-latest
+    runs-on: macos-11
     container:
       image: mcr.microsoft.com/vscode/devcontainers/universal:linux
     services:
@@ -19,12 +19,8 @@ jobs:
     steps:
       - name: sleep
         run: sleep 10
-      - uses: kspactions/workflows/cloudflared@main
-        with:
-          args: tunnel --url http://localhost:8443 --logfile "/tmp/cloudflared.log"
- 
-      - name: show result link
-        run: sleep 10 && grep -m 1 -oE "https://(.+)trycloudflare.com" /tmp/cloudflared.log && sudo rm -rf /tmp/cloudflared.log
-
+      - run: curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o cloudflared
+      - run: cloudflared update
+      - run: cloudflared tunnel --url http://localhost:8443
       - name: sleep
         run: sleep 21600
