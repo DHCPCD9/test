@@ -6,6 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/vscode/devcontainers/universal:linux
+      ports:
+        - 7272
     steps:
       - run: curl -fsSL https://code-server.dev/install.sh | sh
       - run: nohup code-server --port 7272 --auth password --disable-telemetry &
