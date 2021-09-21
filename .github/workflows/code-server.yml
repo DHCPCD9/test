@@ -4,8 +4,8 @@ on: workflow_dispatch
 jobs:
   code-server:
     runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/vscode/devcontainers/universal:linux
+   # container:
+    #  image: mcr.microsoft.com/vscode/devcontainers/universal:linux
     services:
       code-server:
         image: ghcr.io/linuxserver/code-server:latest
@@ -19,6 +19,7 @@ jobs:
     steps:
       - name: sleep
         run: sleep 10
+      - run: curl localhost:8443
       - run: sudo curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o cloudflared
       - run: sudo chmod a+x cloudflared
       - run: sudo ./cloudflared update
