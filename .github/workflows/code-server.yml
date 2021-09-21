@@ -3,7 +3,7 @@ on: workflow_dispatch
 
 jobs:
   code-server:
-    runs-on: macos-11
+    runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/vscode/devcontainers/universal:linux
     services:
