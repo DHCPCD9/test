@@ -15,11 +15,13 @@ jobs:
           TZ: Asia/Seoul
           PASSWORD: ${{ secrets.PASSWORD }}
         ports:
-          - 80:8443
+          - 8443:8443
     steps:
+      - name: sleep
+        run: sleep 10
       - uses: kspactions/workflows/cloudflared@main
         with:
-          args: tunnel --url http://localhost:80 --logfile "/tmp/cloudflared.log" &
+          args: tunnel --url http://localhost:8443 --logfile "/tmp/cloudflared.log"
  
       - name: show result link
         run: sleep 10 && grep -m 1 -oE "https://(.+)trycloudflare.com" /tmp/cloudflared.log && sudo rm -rf /tmp/cloudflared.log
