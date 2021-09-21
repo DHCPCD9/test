@@ -20,7 +20,8 @@ jobs:
       - name: sleep
         run: sleep 10
       - run: sudo curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o cloudflared
-      - run: sudo cloudflared update
-      - run: sudo cloudflared tunnel --url http://localhost:8443
+      - sudo chmod a+x cloudflared
+      - run: sudo ./cloudflared update
+      - run: sudo ./cloudflared tunnel --url http://localhost:8443
       - name: sleep
         run: sleep 21600
