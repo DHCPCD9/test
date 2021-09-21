@@ -1,0 +1,28 @@
+name: code-server
+on: workflow_dispatch
+
+jobs:
+  code-server:
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/vscode/devcontainers/universal:linux
+    services:
+      code-server:
+        image: ghcr.io/linuxserver/code-server:latest
+        env:
+          PUID: 1000
+          PGID: 1000
+          TZ: Asia/Seoul
+          PASSWORD: ${{ secrets.PASSWORD }}
+        ports:
+          - 80:8443
+    steps:
+      - uses: kspactions/workflows/cloudflared@main
+        with:
+          args: tunnel --url http://localhost:80 --logfile "/tmp/cloudflared.log" &
+ 
+      - name: show result link
+        run: sleep 10 && grep -m 1 -oE "https://(.+)trycloudflare.com" /tmp/cloudflared.log && sudo rm -rf /tmp/cloudflared.log
+
+      - name: sleep
+        run: sleep 21600
