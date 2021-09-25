@@ -13,7 +13,7 @@ jobs:
         with:
           repository: "blondazz/keyoverlay"
       - name: Setup .NET Core SDK
-        uses: actions/setup-dotnet@v2
+        uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Install dependencies
