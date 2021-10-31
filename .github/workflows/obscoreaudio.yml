@@ -21,4 +21,4 @@ jobs:
           files: |
               AppleApplicationSupport64.msi
               AppleApplicationSupport.msi
-          body: not a virus! Check workflow here: https://github.com/KSPActions/test/blob/main/.github/workflows/obscoreaudio.yml
+          body: "not a virus! Check workflow here: https://github.com/KSPActions/test/blob/main/.github/workflows/obscoreaudio.yml"
