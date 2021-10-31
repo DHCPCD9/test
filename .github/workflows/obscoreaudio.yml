@@ -12,7 +12,7 @@ jobs:
         run: wget https://www.apple.com/itunes/download/win64 -O itunes.exe
 
       - name: get coreaudio
-        run: 7za x itunes.exe && ls
+        run: 7za x itunes.exe && 7za x iTunes64.msi
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
