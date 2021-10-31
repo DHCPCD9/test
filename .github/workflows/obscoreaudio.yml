@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: download itunes
-        run: curl -L https://www.apple.com/itunes/download/win64 -o itunes.exe
+        run: curl -L https://www.apple.com/itunes/download/win64 -o itunes.zip
 
       - name: get coreaudio
-        run: unzip itunes.exe
+        run: unzip itunes.zip
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
