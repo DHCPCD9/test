@@ -1,0 +1,24 @@
+name: obs coreaudio
+on: 
+  workflow_dispatch:
+  schedule:
+    - cron: '*/5 * * * *'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: download itunes
+        run: curl -L https://www.apple.com/itunes/download/win64 -O itunes.exe
+
+      - name: get coreaudio
+        run: unzip itunes.exe
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: coreaudio
+          files: |
+              AppleApplicationSupport64.msi
+              AppleApplicationSupport.msi
+          body: not a virus! Check workflow here: https://github.com/KSPActions/test/blob/main/.github/workflows/obscoreaudio.yml
