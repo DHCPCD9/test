@@ -8,13 +8,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: install p7zip
-        run: sudo apt-get update && sudo apt-get install p7zip -y
       - name: download itunes
         run: wget https://www.apple.com/itunes/download/win64 -O itunes.exe
 
       - name: get coreaudio
-        run: ls && 7za e itunes.exe
+        run: 7za e itunes.exe
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
