@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: download itunes
-        run: curl -L https://www.apple.com/itunes/download/win64 -O itunes.exe
+        run: curl -L https://www.apple.com/itunes/download/win64 -o itunes.exe
 
       - name: get coreaudio
         run: unzip itunes.exe
