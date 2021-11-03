@@ -7,7 +7,7 @@ on: workflow_dispatch
 
 jobs:
   windows-rdp:
-    runs-on: windows-2022
+    runs-on: windows-2020
     continue-on-error: true
 
     steps:
