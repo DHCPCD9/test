@@ -1,5 +1,5 @@
 name: KeyOverlay
-on: [push, workflow_dispatch]
+on: workflow_dispatch
 
 jobs:
   keyoverlay:
