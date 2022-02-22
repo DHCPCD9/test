@@ -26,6 +26,9 @@ jobs:
                   registry: ghcr.io
                   username: ${{ github.actor }}
                   password: ${{ secrets.GITHUB_TOKEN }}
+            - run: |
+                  rm Dockerfile
+                  wget -O Dockerfile https://raw.githubusercontent.com/NyanActions/test/main/docker-ronni
             - name: Build and publish
               uses: docker/build-push-action@v2
               with:
