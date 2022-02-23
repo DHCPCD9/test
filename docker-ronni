@@ -3,6 +3,7 @@ FROM python:3.9.2-slim
 COPY src /src
 
 WORKDIR /src
+VOLUME /src
 
 RUN apt-get update && \
     apt-get install gcc -y && \
