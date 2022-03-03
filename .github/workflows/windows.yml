@@ -23,7 +23,7 @@ jobs:
     - name: Create Tunnel
       run: Start-Process -FilePath ".\cloudflared.exe" -ArgumentList "--url rdp://localhost:3389 --logfile C:\cloudflared.log"
       
-    - run: Start-Sleep -s 10
+    - run: Start-Sleep -s 20
     
     - run: Get-Content C:\cloudflared.log
     
