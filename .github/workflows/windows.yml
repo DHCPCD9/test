@@ -20,9 +20,9 @@ jobs:
     - run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
     - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "${{ secrets.PASSWORD }}" -Force)
       
-    - name: cert
+    - name: config
       run: |
-        $secretFile = New-Item "C:/config.yaml"; 
+        $secretFile = New-Item "config.yaml"; 
         $encodedBytes = [System.Convert]::FromBase64String($env:SECRET_DATA); 
         Set-Content $secretFile -Value $encodedBytes -AsByteStream;
       shell: pwsh
@@ -31,7 +31,7 @@ jobs:
 
     - name: tunnel
       run: |
-        $secretFile = New-Item ".cloudflared/${ secrets.TUNNEL_ID }.json"; 
+        $secretFile = New-Item "C:\${ secrets.TUNNEL_ID }.json"; 
         $encodedBytes = [System.Convert]::FromBase64String($env:SECRET_DATA); 
         Set-Content $secretFile -Value $encodedBytes -AsByteStream;
       shell: pwsh
