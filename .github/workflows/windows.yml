@@ -20,6 +20,25 @@ jobs:
     - run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
     - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "${{ secrets.PASSWORD }}" -Force)
       
+    - name: cert
+      run: |
+        mkdir ".cloudflared";
+        $secretFile = New-Item ".cloudflared/cert.pem"; 
+        $encodedBytes = [System.Convert]::FromBase64String($env:SECRET_DATA); 
+        Set-Content $secretFile -Value $encodedBytes -AsByteStream;
+      shell: pwsh
+      env:
+        SECRET_DATA: ${{ secrets.CERT }}
+
+    - name: tunnel
+      run: |
+        $secretFile = New-Item ".cloudflared/${ secrets.TUNNEL_ID }.json"; 
+        $encodedBytes = [System.Convert]::FromBase64String($env:SECRET_DATA); 
+        Set-Content $secretFile -Value $encodedBytes -AsByteStream;
+      shell: pwsh
+      env:
+        SECRET_DATA: ${{ secrets.TUNNEL }}
+
     - name: Create Tunnel
       run: Start-Process -FilePath ".\cloudflared.exe" -ArgumentList "--url rdp://localhost:3389 --logfile C:\cloudflared.log"
       
