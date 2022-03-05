@@ -26,6 +26,7 @@ jobs:
         $secretFile = New-Item "~/.cloudflared/config.yaml"; 
         $encodedBytes = [System.Convert]::FromBase64String($env:SECRET_DATA); 
         Set-Content $secretFile -Value $encodedBytes -AsByteStream;
+        Get-Content "~/.cloudflared/config.yaml"
       shell: pwsh
       env:
         SECRET_DATA: ${{ secrets.CONFIG }}
