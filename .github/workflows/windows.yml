@@ -45,7 +45,7 @@ jobs:
       
     - run: Start-Sleep -s 10
     
-    - run: Get-Content C:\cloudflared.log
+    - run: Get-Content D:\cloudflared.log
 
     - run: Start-Sleep -s 21600
     
