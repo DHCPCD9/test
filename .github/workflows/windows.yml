@@ -39,7 +39,7 @@ jobs:
         SECRET_DATA: ${{ secrets.TUNNEL }}
 
     - name: Create Tunnel
-      run: Start-Process -FilePath ".\cloudflared.exe" -ArgumentList "tunnel run --url rdp://localhost:3389 --logfile C:\cloudflared.log --credentials-file cert.pem ${ secrets.TUNNEL_ID }"
+      run: Start-Process -FilePath ".\cloudflared.exe" -ArgumentList "tunnel --config config.yaml run ${ secrets.TUNNEL_ID }"
       
     - run: Start-Sleep -s 10
     
@@ -50,4 +50,4 @@ jobs:
 
     - run: Start-Sleep -s 21600
     
-    
+   
