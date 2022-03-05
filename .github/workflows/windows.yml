@@ -44,9 +44,6 @@ jobs:
     - run: Start-Sleep -s 10
     
     - run: Get-Content C:\cloudflared.log
-    
-    - name: show result link
-      run: findstr "trycloudflare.com" C:\cloudflared.log
 
     - run: Start-Sleep -s 21600
     
