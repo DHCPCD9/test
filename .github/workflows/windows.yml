@@ -31,6 +31,7 @@ jobs:
 
     - name: tunnel
       run: |
+        mkdir ".cloudflared";
         $secretFile = New-Item ".cloudflared/${ secrets.TUNNEL_ID }.json"; 
         $encodedBytes = [System.Convert]::FromBase64String($env:SECRET_DATA); 
         Set-Content $secretFile -Value $encodedBytes -AsByteStream;
