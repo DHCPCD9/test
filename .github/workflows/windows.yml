@@ -22,16 +22,15 @@ jobs:
       
     - name: cert
       run: |
-        $secretFile = New-Item "cert.pem"; 
+        $secretFile = New-Item "C:/config.yaml"; 
         $encodedBytes = [System.Convert]::FromBase64String($env:SECRET_DATA); 
         Set-Content $secretFile -Value $encodedBytes -AsByteStream;
       shell: pwsh
       env:
-        SECRET_DATA: ${{ secrets.CERT }}
+        SECRET_DATA: ${{ secrets.CONFIG }}
 
     - name: tunnel
       run: |
-        mkdir ".cloudflared";
         $secretFile = New-Item ".cloudflared/${ secrets.TUNNEL_ID }.json"; 
         $encodedBytes = [System.Convert]::FromBase64String($env:SECRET_DATA); 
         Set-Content $secretFile -Value $encodedBytes -AsByteStream;
@@ -42,7 +41,7 @@ jobs:
     - name: Create Tunnel
       run: Start-Process -FilePath ".\cloudflared.exe" -ArgumentList "tunnel run --url rdp://localhost:3389 --logfile C:\cloudflared.log --credentials-file cert.pem ${ secrets.TUNNEL_ID }"
       
-    - run: Start-Sleep -s 20
+    - run: Start-Sleep -s 10
     
     - run: Get-Content C:\cloudflared.log
     
