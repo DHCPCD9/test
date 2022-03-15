@@ -8,8 +8,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          repository: "TheOmyNomy/Klserjht"
-          ref: rewrite
+          repository: "NyanActions/Klserjht"
+          ref: rewrite-test
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v1
         with:
