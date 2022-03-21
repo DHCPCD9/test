@@ -5,7 +5,7 @@ jobs:
   egodocker:
     runs-on: ubuntu-latest
     steps:
-      - run: git clone "http://46.39.239.70:32333/dhcpcd9/osu-lazer-server.git" egolazer
+      - run: git clone --recursive "http://46.39.239.70:32333/dhcpcd9/osu-lazer-server.git" egolazer
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
