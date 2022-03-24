@@ -1,5 +1,5 @@
 name: egodocker
-on: push
+on: workflow_dispatch
 
 jobs:
   egodocker:
@@ -22,7 +22,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ghcr.io/nyanactions/test/egolazer
+          images: ghcr.io/nyanarchive/osu-lazer-server:latest
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
