@@ -2,12 +2,8 @@ name: lazer-patcher
 on: workflow_dispatch
 
 jobs:
-  lazer-patcher:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ "ubuntu-latest", "windows-latest", "macos-latest" ]
-
+  linux:
+    runs-on: ubuntu-latest
     steps:
       - run: git clone http://git.dhcpcd.xyz/dhcpcd9/Patcher.git patch
       - name: Setup .NET Core SDK
@@ -24,5 +20,23 @@ jobs:
       - name: Upload to artifact
         uses: actions/upload-artifact@v2
         with:
-          name: lazer-patcher-${{ matrix.os }}
+          name: lazer-patcher-linux
           path: patch/build/
+
+  macos:
+    runs-on: macos-latest
+    steps:
+      - run: git clone http://git.dhcpcd.xyz/dhcpcd9/Patcher.git patch
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.x
+      - run: sed -i '' 's/lazer.dhcpcd.xyz/lazer.aeong.one/' patch/osu-lazer-dll-patcherProgram.cs
+      - name: Build
+        run: cd patch && dotnet build --configuration Release -o build/
+      - name: Upload to artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: lazer-patcher-macos
+          path: patch/build/
+
