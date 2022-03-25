@@ -1,0 +1,28 @@
+name: lazer-patcher
+on: workflow_dispatch
+
+jobs:
+  lazer-patcher:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ "ubuntu-latest", "windows-latest", "macos-latest" ]
+
+    steps:
+      - run: git clone http://git.dhcpcd.xyz/dhcpcd9/Patcher.git patch
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.x
+      - name: Find and Replace
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "lazer.dhcpcd.xyz"
+          replace: "lazer.aeong.one"
+      - name: Build
+        run: cd patch && dotnet build --configuration Release -o build/
+      - name: Upload to artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: lazer-patcher-${{ matrix.os }}
+          path: patch/build/
