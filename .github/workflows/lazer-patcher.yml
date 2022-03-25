@@ -31,7 +31,7 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 6.x
-      - run: sed -i '' 's/lazer.dhcpcd.xyz/lazer.aeong.one/' patch/osu-lazer-dll-patcherProgram.cs
+      - run: sed -i '' 's/lazer.dhcpcd.xyz/lazer.aeong.one/' patch/osu-lazer-dll-patcher/Program.cs
       - name: Build
         run: cd patch && dotnet build --configuration Release -o build/
       - name: Upload to artifact
@@ -39,4 +39,23 @@ jobs:
         with:
           name: lazer-patcher-macos
           path: patch/build/
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - run: git clone http://git.dhcpcd.xyz/dhcpcd9/Patcher.git patch
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.x
+      - run: ((Get-Content -path patch/osu-lazer-dll-patcher/Program.cs -Raw) -replace 'lazer.dhcpcd.xyz','lazer.aeong.one') | Set-Content -Path patch/osu-lazer-dll-patcher/Program.cs
+      - name: Build
+        run: cd patch && dotnet build --configuration Release -o build/
+      - name: Upload to artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: lazer-patcher-winos
+          path: patch/build/
+
+
 
