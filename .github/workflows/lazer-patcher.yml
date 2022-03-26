@@ -69,7 +69,7 @@ jobs:
         with:
           dotnet-version: 6.0.x
       - name: regex
-        run: "sed -i '' 's/https(.*)ppy.sh/lazer.aeong.one/g' 'osu.Game/Online/ProductionEndpointConfiguration.cs""
+        run: "sed -i '' 's/https(.*)ppy.sh/lazer.aeong.one/g' 'osu.Game/Online/ProductionEndpointConfiguration.cs'"
           regex: true
       - name: Set default Xamarin SDK version
         run: |
