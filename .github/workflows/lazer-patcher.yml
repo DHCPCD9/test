@@ -74,11 +74,11 @@ jobs:
       - name: regex
         run: sed -i '' 's/https(.*)ppy.sh/lazer.dhcpcd.xyz/g' 'osu.Game/Online/ProductionEndpointConfiguration.cs'
       - name: Build
-        run: msbuild osu.Android/osu.Android.csproj /restore /p:Configuration=Release /p:AndroidBuildApplicationPackage=true /p:OutputPath=build
+        run: msbuild osu.Android/osu.Android.csproj /restore /p:Configuration=Release /p:AndroidBuildApplicationPackage=true
       - name: Upload to artifact
         uses: actions/upload-artifact@v2
         with:
           name: lazer-android
-          path: build/
+          path: osu.Android/obj/Release/android/bin/
 
 
