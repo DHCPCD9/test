@@ -57,7 +57,7 @@ jobs:
           name: lazer-patcher-winos
           path: patch/build/
   android:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -67,14 +67,13 @@ jobs:
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 6.x
-      - name: Find and Replace
-        uses: jacobtomlinson/gha-find-replace@v2
-        with:
-          find: "/https.*ppy.*sh/gm"
-          replace: "lazer.aeong.one"
-          include: "osu.Game/Online/ProductionEndpointConfiguration.cs"
+          dotnet-version: 6.0.x
+      - name: regex
+        run: "sed -i '' 's/https(.*)ppy.sh/lazer.aeong.one/g' 'osu.Game/Online/ProductionEndpointConfiguration.cs""
           regex: true
+      - name: Set default Xamarin SDK version
+        run: |
+            $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.12 --android=11.2
       - name: Build
         run: dotnet build osu.Android --configuration Release -p:PublishSingleFile=true --no-self-contained -r android-arm64 -o build/
       - name: Upload to artifact
