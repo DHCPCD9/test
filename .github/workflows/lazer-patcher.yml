@@ -72,7 +72,7 @@ jobs:
       - name: Find and Replace
         uses: jacobtomlinson/gha-find-replace@v2
         with:
-          find: '/https\:\/\/.*ppy\.sh/gm'
+          find: "/https.*ppy.*sh/gm"
           replace: "lazer.aeong.one"
           include: "osu.Game/Online/ProductionEndpointConfiguration.cs"
           regex: true
