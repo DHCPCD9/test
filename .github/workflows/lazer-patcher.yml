@@ -57,5 +57,31 @@ jobs:
           name: lazer-patcher-winos
           path: patch/build/
 
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: "ppy/osu"
+          submodules: "recursive"
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.x
+      - name: Find and Replace
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "/https\:\/\/.*ppy\.sh/gm"
+          replace: "lazer.aeong.one"
+          include: "osu.Game/Online/ProductionEndpointConfiguration.cs"
+          regex: true
+      - name: Build
+        run: dotnet build osu.Android --configuration Release -p:PublishSingleFile=true --no-self-contained -r android-arm64 -o build/
+      - name: Upload to artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: lazer-patcher-linux
+          path: patch/build/
 
 
