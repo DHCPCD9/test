@@ -72,13 +72,13 @@ jobs:
         with:
           dotnet-version: "6.0.x"
       - name: regex
-        run: sed -i '' 's/https(.*)ppy.sh/lazer.dhcpcd.xyz/g' 'osu.Game/Online/ProductionEndpointConfiguration.cs'
+        run: sed -i '' 's/https(.*)ppy.sh/lazer.aeong.one/g' 'osu.Game/Online/ProductionEndpointConfiguration.cs'
       - name: Build
         run: msbuild osu.Android/osu.Android.csproj /restore /p:Configuration=Release /p:AndroidBuildApplicationPackage=true
       - name: Upload to artifact
         uses: actions/upload-artifact@v2
         with:
           name: lazer-android
-          path: osu.Android/obj/Release/android/bin/
+          path: osu.Android/obj/Release/android/bin/sh.ppy.osulazer.apk
 
 
