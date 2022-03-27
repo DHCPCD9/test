@@ -9,7 +9,7 @@ jobs:
         with:
           repository: nyanarchive/osu-lazer-server
           submodules: "recursive"
-      - run: mv egolazer/OsuLazerServer/Dockerfile Dockerfile
+      - run: mv OsuLazerServer/Dockerfile Dockerfile
       - name: change mirror
         uses: jacobtomlinson/gha-find-replace@v2
         with:
