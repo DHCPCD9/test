@@ -72,11 +72,10 @@ jobs:
         with:
           dotnet-version: "6.0.x"
       - name: Find and Replace
-        uses: jacobtomlinson/gha-find-replace@v2
+        uses: mingjun97/file-regex-replace@master
         with:
-          find: 's/https:\/\/\w*\.ppy\.sh/g'
-          replace: "lazer.aeong.one"
-          regex: true
+          regex: 's/https:\/\/\w*\.ppy\.sh/g'
+          replacement: "https://lazer.aeong.one"
           include: "osu.Game/Online/ProductionEndpointConfiguration.cs"
       - name: check domain has been changed
         run: cat osu.Game/Online/ProductionEndpointConfiguration.cs
