@@ -81,6 +81,6 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: lazer-android
-          path: osu.Android/obj/Release/android/bin/sh.ppy.osulazer.apk
+          path: osu.Android/obj/Debug/android/bin/sh.ppy.osulazer.apk
 
 
