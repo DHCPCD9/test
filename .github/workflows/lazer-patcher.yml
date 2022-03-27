@@ -74,10 +74,10 @@ jobs:
       - name: Find and Replace
         uses: jacobtomlinson/gha-find-replace@v2
         with:
-          find: "s/https:\/\/\w*\.ppy\.sh/g"
+          find: 's/https:\/\/\w*\.ppy\.sh/g'
           replace: "lazer.aeong.one"
           regex: true
-          include: osu.Game/Online/ProductionEndpointConfiguration.cs
+          include: "osu.Game/Online/ProductionEndpointConfiguration.cs"
       - name: check domain has been changed
         run: cat osu.Game/Online/ProductionEndpointConfiguration.cs
       - name: Build
