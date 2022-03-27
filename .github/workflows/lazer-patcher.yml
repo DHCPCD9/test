@@ -72,7 +72,9 @@ jobs:
         with:
           dotnet-version: "6.0.x"
       - name: regex
-        run: sed -i '' 's/https(.*)ppy.sh/lazer.aeong.one/g' 'osu.Game/Online/ProductionEndpointConfiguration.cs'
+        run: |
+            sed -i '' 's/https(.*)ppy.sh/lazer.aeong.one/g' 'osu.Game/Online/ProductionEndpointConfiguration.cs'
+            cat osu.Game/Online/ProductionEndpointConfiguration.cs
       - name: Build
         run: msbuild osu.Android/osu.Android.csproj /restore /t:PackageForAndroid /t:SignAndroidPackage /p:Configuration=Release
       - name: Upload to artifact
