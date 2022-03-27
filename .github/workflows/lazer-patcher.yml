@@ -76,11 +76,11 @@ jobs:
       - name: Build
         run: |
           nuget restore
-          msbuild osu.Android/osu.Android.csproj /verbosity:normal /t:Rebuild /t:PackageForAndroid /t:SignAndroidPackage /p:Configuration=Debug
+          msbuild osu.Android/osu.Android.csproj /verbosity:normal /t:Rebuild /t:PackageForAndroid /t:SignAndroidPackage /p:Configuration=Release
       - name: Upload to artifact
         uses: actions/upload-artifact@v2
         with:
           name: lazer-android
-          path: osu.Android/obj/Debug/android/bin/sh.ppy.osulazer.apk
+          path: osu.Android/bin/Release/sh.ppy.osulazer-Signed.apk
 
 
