@@ -74,7 +74,9 @@ jobs:
       - name: regex
         run: sed -i '' 's/https(.*)ppy.sh/lazer.aeong.one/g' 'osu.Game/Online/ProductionEndpointConfiguration.cs'
       - name: Build
-        run: msbuild osu.Android/osu.Android.csproj /restore /t:SignAndroidPackage /p:Configuration=Release /p:AndroidBuildApplicationPackage=true
+        run: |
+          nuget restore
+          msbuild osu.Android/osu.Android.csproj /verbosity:normal /t:Rebuild /t:PackageForAndroid /t:SignAndroidPackage /p:Configuration=Debug
       - name: Upload to artifact
         uses: actions/upload-artifact@v2
         with:
