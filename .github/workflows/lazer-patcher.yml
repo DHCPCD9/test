@@ -74,7 +74,7 @@ jobs:
       - name: Find and Replace
         uses: mingjun97/file-regex-replace@master
         with:
-          regex: 's/https:\/\/\w*\.ppy\.sh/g'
+          regex: 'https:\/\/\w*\.ppy\.sh'
           replacement: "https://lazer.aeong.one"
           include: "osu.Game/Online/ProductionEndpointConfiguration.cs"
       - name: check domain has been changed
