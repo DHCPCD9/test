@@ -75,7 +75,7 @@ jobs:
         uses: mingjun97/file-regex-replace@master
         with:
           regex: 'https:\/\/\w*\.ppy\.sh'
-          replacement: "https://lazer.aeong.one"
+          replacement: "https://lazer.dhcpcd.xyz"
           include: "osu.Game/Online/ProductionEndpointConfiguration.cs"
       - name: check domain has been changed
         run: cat osu.Game/Online/ProductionEndpointConfiguration.cs
