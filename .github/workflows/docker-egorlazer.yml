@@ -5,9 +5,16 @@ jobs:
   egodocker:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          git clone --recursive "http://git.dhcpcd.xyz/dhcpcd9/osu-lazer-server.git" egolazer
-          mv egolazer/OsuLazerServer/Dockerfile egolazer/
+      - uses: actions/checkout@v2
+        with:
+          repository: nyanarchive/osu-lazer-server
+          submodules: "recursive"
+      - run: mv egolazer/OsuLazerServer/Dockerfile Dockerfile
+      - name: change mirror
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "rus.nerinyan.moe"
+          replace: "api.nerinyan.moe"
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
@@ -26,7 +33,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: egolazer/
+          context: .
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
