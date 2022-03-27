@@ -74,7 +74,7 @@ jobs:
       - name: regex
         run: |
             brew install gnu-sed
-            gsed -i '' 's/https:\/\/\w*\.ppy\.sh/https:\/\/lazer\.aeong\.one/g' 'osu.Game/Online/ProductionEndpointConfiguration.cs'
+            gsed 's/https:\/\/\w*\.ppy\.sh/https:\/\/lazer\.aeong\.one/g' 'osu.Game/Online/ProductionEndpointConfiguration.cs'
             cat osu.Game/Online/ProductionEndpointConfiguration.cs
       - name: Build
         run: msbuild osu.Android/osu.Android.csproj /restore /t:PackageForAndroid /t:SignAndroidPackage /p:Configuration=Release
