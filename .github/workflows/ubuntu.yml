@@ -33,9 +33,9 @@ jobs:
     - name: Setup Cloudflare Tunnel
       uses: AnimMouse/setup-cloudflared@v1
       with:
-        cloudflare_tunnel_credential: ${{ secrets.CLOUDFLARE_TUNNEL_CREDENTIAL }}
-        cloudflare_tunnel_configuration: ${{ secrets.CLOUDFLARE_TUNNEL_CONFIGURATION }}
-        cloudflare_tunnel_id: ${{ secrets.CLOUDFLARE_TUNNEL_ID }}
+        cloudflare_tunnel_credential: ${{ secrets.CERT }}
+        cloudflare_tunnel_configuration: ${{ secrets.CONFIG }}
+        cloudflare_tunnel_id: "ef1abd06-4581-4de7-b114-3e1c59ed9ea4"
       
     - name: Shutdown and view logs of Cloudflare Tunnel
       if: always()
